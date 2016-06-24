@@ -5,7 +5,9 @@ import {List} from 'material-ui/List';
 import Snackbar from 'material-ui/Snackbar';
 import {connect} from 'react-redux';
 
-import {fetchPosts} from '../actions/posts'
+import {fetchPosts, getPosts} from '../actions/posts'
+import * as PostsController from '../controllers/posts'
+import Controller from '../controller'
 import Post from '../components/post';
 
 const Posts = React.createClass({
@@ -22,12 +24,12 @@ const Posts = React.createClass({
     },
     componentDidMount() {
         const { dispatch, params } = this.props;
-        dispatch(fetchPosts(params.pageNumber));
+        dispatch(Controller(PostsController.get, params));
     },
     componentWillReceiveProps(nextProps) {
         const { dispatch, params } = nextProps;
         if (params.pageNumber !== this.props.params.pageNumber) {
-            dispatch(fetchPosts(params.pageNumber));
+            dispatch(PostsController.getPosts, params.pageNumber);
             this.setState({showSnackBar: true});
         }
     },
@@ -48,10 +50,11 @@ const Posts = React.createClass({
 });
 
 function mapStateToProps(state) {
-    const items = state.posts.get('items');
-    const pageNumber = state.posts.get('pageNumber');
-    const pagesCount = state.posts.get('pagesCount');
-    const isFetching = state.posts.get('isFetching');
+    const posts = state.get('posts');
+    const items = posts.get('items');
+    const pageNumber = posts.get('pageNumber');
+    const pagesCount = posts.get('pagesCount');
+    const isFetching = posts.get('isFetching');
     return {
         items, pageNumber, pagesCount, isFetching
     };

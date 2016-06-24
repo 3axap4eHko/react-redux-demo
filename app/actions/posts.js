@@ -48,3 +48,10 @@ export const fetchPosts = pageNumber => {
             });
     }
 };
+
+export const getPosts = (...args) => {
+    debugger;
+    return (dispatch, getState) => {
+        debugger;
+    }
+};

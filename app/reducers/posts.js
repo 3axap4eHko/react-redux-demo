@@ -8,6 +8,7 @@ export default function (state = Map({
     pagesCount: 0,
     isFetching: false
 }), action) {
+    debugger;
     switch (action.type) {
         case TYPES.POSTS_REQUEST:
             return state.merge({isFetching: true});
