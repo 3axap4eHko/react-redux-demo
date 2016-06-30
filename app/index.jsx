@@ -12,6 +12,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import MainLayout from './layouts/main';
 import PostsContainer from './containers/posts';
+import PostContainer from './containers/post';
 
 import createStore from './store';
 const store = createStore();
@@ -22,7 +23,8 @@ ReactDOM.render(
             <Router history={hashHistory} >
                 <Route path="/" component={MainLayout}>
                     <IndexRedirect to="/page/1"/>
-                    <Route path="/page/:pageNumber" component={PostsContainer}/>
+                    <Route path="/page/:page" component={PostsContainer}/>
+                    <Route path="/post/:id" component={PostContainer}/>
                 </Route>
             </Router>
         </Provider>

@@ -1,11 +1,8 @@
 'use strict';
 
-import React from 'react';
-import {connect} from 'react-redux';
-
 const components = new Map();
 
-const _hook = (component, method, callback) => {
+export default (component, method, callback) => {
     if (!components.has(component)) {
         components.set(component, {});
     }
@@ -20,9 +17,3 @@ const _hook = (component, method, callback) => {
     }
     hooks[method].push(callback);
 };
-
-
-export default function(Component) {
-
-    return connect(Component);
-}
