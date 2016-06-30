@@ -1,0 +1,7 @@
+{
+    "actionsPath": "./app/actions",
+    "reducersPath": "./app/reducers",
+    "reducersIndexTemplatePath": "./redux-templates/reducer-index.jst",
+    "typesPath": "./app/types",
+    "defaultStatePath": "./app/state"
+}
