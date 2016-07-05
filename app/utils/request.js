@@ -3,19 +3,26 @@
 
 import xhr from 'xhr';
 
+class RequestError extends Error {
+    constructor(message, code) {
+        super(message);
+        this.code = code;
+    }
+}
+
 export default function request(url) {
     return new Promise( (resolve, reject) => {
         xhr({url}, function (err, resp, body) {
             if (err) {
-                return reject(err)
+                return reject(new RequestError(err.message, 400));
             }
             if ( parseInt(resp.statusCode/100) !== 2) {
-                return reject(new Error(body));
+                return reject(new RequestError(body, resp.statusCode));
             }
             try {
                 resolve(JSON.parse(body))
             } catch (e) {
-                reject(e);
+                reject(new RequestError(e.message, 400));
             }
         });
     }) ;

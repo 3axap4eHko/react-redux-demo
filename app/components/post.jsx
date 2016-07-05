@@ -6,10 +6,10 @@ import {ListItem} from 'material-ui/List';
 
 export default React.createClass({
     render() {
-        const {id, title, content} = this.props;
+        const {post, title, content} = this.props;
         return (
             <ListItem
-                primaryText={<Link to={`/post/${id}`}>{title}</Link>}
+                primaryText={<Link to={`/post/${post}`}>{title}</Link>}
                 secondaryText={<p>{content}</p>}
                 secondaryTextLines={2}
             />

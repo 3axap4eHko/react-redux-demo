@@ -2,25 +2,19 @@
 
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
-
-import serviceProvider from '../service';
+import PageLink from '../components/page-link';
+import {messageHide} from '../actions'
+import {messageSelector} from '../pure/message-selectors';
 
 const MainLayout =  React.createClass({
-    childContextTypes: {
-        showMessage: React.PropTypes.func.isRequired
-    },
     getInitialState(){
-        const service = serviceProvider(this);
-        this.getChildContext = () => service;
-        
         return {
-            message: '',
-            showMessage: false,
             isDrawerShown: false
         };
     },
@@ -28,14 +22,13 @@ const MainLayout =  React.createClass({
         this.setState({isDrawerShown: !this.state.isDrawerShown});
     },
     onRequestClose() {
-        this.setState({showMessage: false});
+        this.props.dispatch(messageHide())
     },
     render() {
-        const {children} = this.props;
-        const {message, showMessage} = this.state;
+        const {children, message, displayMessage} = this.props;
         return (<div>
             <AppBar
-                title="Title"
+                title={<FlatButton href="#" linkButton={true}>React-Redux Demo</FlatButton>}
                 onLeftIconButtonTouchTap={this.onToggleDrawer}
             />
             <Drawer
@@ -43,19 +36,27 @@ const MainLayout =  React.createClass({
                 open={this.state.isDrawerShown}
                 onRequestChange={isDrawerShown => this.setState({isDrawerShown})}
             >
-                <MenuItem onClick={this.onToggleDrawer}><Link to={{pathname: '/page/1' }}>1</Link></MenuItem>
-                <MenuItem onClick={this.onToggleDrawer}><Link to={{pathname: '/page/2' }}>2</Link></MenuItem>
+                <PageLink onClick={this.onToggleDrawer} primaryText="1" link="/page/1" />
+                <PageLink onClick={this.onToggleDrawer} primaryText="2" link="/page/2"/>
             </Drawer>
             {children}
             <Snackbar
                 message={message}
                 autoHideDuration={4000}
-                open={showMessage}
+                open={displayMessage}
                 onRequestClose={this.onRequestClose}
             />
         </div>);
     }
 });
 
+function mapStateToProps(state) {
+    const message = messageSelector(state).toJS();
+    return {
+        ...message
+    };
+}
 
-export default MainLayout;
+
+export default connect(mapStateToProps)(MainLayout);
+

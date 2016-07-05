@@ -2,21 +2,23 @@
 'use strict';
 
 import {
-    PROGRESS,
-    SUCCESS,
-    FAILURE,
+    STATUS_PROCESS,
+    STATUS_SUCCESS,
+    STATUS_FAILURE,
 } from './../../types';
 
 import {setPosts} from '../../pure/posts-functions'
 
-export default function(state, action) {
+import defaultState from '../../states/posts';
+
+export default function(state = defaultState, action) {
     switch(action.status) {
-        case PROGRESS:
+        case STATUS_PROCESS:
             return state;
-        case SUCCESS:
-            return setPosts(action.result);
-        case FAILURE:
-            return state;
+        case STATUS_SUCCESS:
+            return setPosts(state, action.result);
+        case STATUS_FAILURE:
+            return defaultState.set('error', { error: action.error });
     }
     return state;
 };

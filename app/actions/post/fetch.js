@@ -3,6 +3,6 @@
 
 import request from '../../utils/request';
 
-export default function(getState, id) {
-    return request(`/data/post${id}.json`);
+export default function(getState, post) {
+    return request(`/data/post${post}.json`);
 }

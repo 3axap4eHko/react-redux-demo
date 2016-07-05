@@ -2,4 +2,4 @@
 
 import {fromJS} from 'immutable';
 
-export const setPosts = posts => fromJS(posts);
+export const setPosts = (state, posts) => fromJS(posts);

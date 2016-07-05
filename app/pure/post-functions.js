@@ -2,6 +2,5 @@
 
 import {fromJS} from 'immutable';
 
-export const setPost = (post) => {
-    return fromJS(post)
-};
+export const setPost = (state, post) => fromJS(post);
+export const setPostError = (state, error) => state.set('error', error);

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory, IndexRedirect} from 'react-router';
+import {Router, Route, hashHistory, IndexRedirect} from 'react-router';
 import {Provider} from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -13,9 +13,11 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MainLayout from './layouts/main';
 import PostsContainer from './containers/posts';
 import PostContainer from './containers/post';
+import ErrorContainer from './containers/error';
 
 import createStore from './store';
-const store = createStore();
+import defaultState from './states'
+const store = createStore(defaultState);
 
 ReactDOM.render(
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
@@ -24,7 +26,8 @@ ReactDOM.render(
                 <Route path="/" component={MainLayout}>
                     <IndexRedirect to="/page/1"/>
                     <Route path="/page/:page" component={PostsContainer}/>
-                    <Route path="/post/:id" component={PostContainer}/>
+                    <Route path="/post/:post" component={PostContainer}/>
+                    <Route path="/error/:error" component={ErrorContainer}/>
                 </Route>
             </Router>
         </Provider>

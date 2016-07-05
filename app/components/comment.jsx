@@ -4,18 +4,12 @@ import React from 'react';
 import {ListItem} from 'material-ui/List';
 
 export default React.createClass({
-    getDefaultProps(){
-        return {
-            author: '--Unknown--',
-            content: '--Empty--'
-        };
-    },
     render() {
+        const {author, content} = this.props;
         return (
             <ListItem
-                primaryText={this.props.author}
-                secondaryText={<p>{this.props.content}</p>
-                }
+                primaryText={author}
+                secondaryText={<p>{content}</p>}
                 secondaryTextLines={2}
             />
         );

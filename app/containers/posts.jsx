@@ -4,35 +4,31 @@ import React from 'react';
 import {List} from 'material-ui/List';
 import {connect} from 'react-redux';
 
-import {postsFetch} from '../actions'
 import Post from '../components/post';
+import {postsFetch, postsReset, messageShow} from '../actions'
 import {postsSelector} from '../pure/posts-selectors';
+import containerMixin from '../mixins/containerMixin';
 
 const Posts = React.createClass({
+    mixins: [containerMixin],
     contextTypes: {
-        showMessage: React.PropTypes.func.isRequired
+        router: React.PropTypes.shape({
+            push: React.PropTypes.func.isRequired
+        })
     },
-    getDefaultProps(){
-        return {
-            items: []
-        };
-    },
-    getInitialState(){
-        return {
-            showSnackBar: true
-        };
-    },
-    componentWillMount() {
-        const { dispatch, params } = this.props;
-        dispatch(postsFetch(params.page))
+    onParamsChange(nextParams, params = {}) {
+        const {dispatch} = this.props;
+        if (typeof nextParams.page === 'undefined' || nextParams.page === null) {
+            dispatch(postsReset());
+        }else if (params.page !== nextParams.page) {
+            dispatch(postsFetch(nextParams.page));
+        }
     },
     componentWillUpdate(nextProps) {
-        const {dispatch, page, params} = this.props;
+        const {dispatch, page} = this.props;
+
         if (nextProps.page !== page) {
-            this.context.showMessage(`${nextProps.page} / ${nextProps.count}`);
-        }
-        if (nextProps.params.page !== params.page) {
-            dispatch(postsFetch(nextProps.params.page));
+            dispatch(messageShow(`${nextProps.page} / ${nextProps.count}`));
         }
     },
     render() {

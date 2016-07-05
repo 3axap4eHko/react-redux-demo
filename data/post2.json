@@ -1,7 +1,7 @@
 {
-  "post": 1,
-  "title": "Test Title 1",
-  "content": "Test Content 1",
+  "post": 2,
+  "title": "Test Title 2",
+  "content": "Test Content 2",
   "comments": [
     {
       "author": "user",

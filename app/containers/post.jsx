@@ -4,26 +4,27 @@ import React from 'react';
 import {List} from 'material-ui/List';
 import {connect} from 'react-redux';
 
-import {postFetch} from '../actions'
 import Comment from '../components/comment';
-
+import {postFetch, postReset, messageShow} from '../actions'
 import {postSelector} from '../pure/post-selectors';
+import containerMixin from '../mixins/containerMixin';
 
 const Post = React.createClass({
-    contextTypes: {
-        showMessage: React.PropTypes.func.isRequired
-    },
-    componentWillMount() {
-        const { dispatch, params } = this.props;
-        dispatch(postFetch(params.id))
+    mixins: [
+        containerMixin
+    ],
+    onParamsChange(nextParams, params = {}) {
+        const {dispatch} = this.props;
+        if (typeof nextParams.post === 'undefined' || nextParams.post === null) {
+            dispatch( postReset() );
+        } else if (params.post !== nextParams.post) {
+            dispatch(postFetch(nextParams.post));
+        }
     },
     componentWillUpdate(nextProps) {
-        const {dispatch, title, id, params} = this.props;
-        if (nextProps.id !== id) {
-            this.context.showMessage(`${nextProps.title}`);
-        }
-        if (nextProps.params.id !== params.id) {
-            dispatch(postFetch(nextProps.params.id));
+        const {dispatch, title, post} = this.props;
+        if (nextProps.post !== post) {
+            dispatch(messageShow(`${nextProps.title}`));
         }
     },
     render() {

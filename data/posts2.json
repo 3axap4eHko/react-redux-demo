@@ -3,32 +3,32 @@
   "count": 2,
   "items": [
     {
-      "id":7,
+      "post":7,
       "title": "Test Title 7",
       "content": "Test Contet 7"
     },
     {
-      "id":8,
+      "post":8,
       "title": "Test Title 8",
       "content": "Test Contet 8"
     },
     {
-      "id":9,
+      "post":9,
       "title": "Test Title 9",
       "content": "Test Contet 9"
     },
     {
-      "id":10,
+      "post":10,
       "title": "Test Title 10",
       "content": "Test Contet 10"
     },
     {
-      "id":11,
+      "post":11,
       "title": "Test Title 11",
       "content": "Test Contet 11"
     },
     {
-      "id":12,
+      "post":12,
       "title": "Test Title 12",
       "content": "Test Contet 12"
     }

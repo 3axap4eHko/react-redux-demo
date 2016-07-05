@@ -1,7 +1,9 @@
 {
-    "actionsPath": "./app/actions",
-    "reducersPath": "./app/reducers",
-    "reducersIndexTemplatePath": "./redux-templates/reducer-index.jst",
-    "typesPath": "./app/types",
-    "defaultStatePath": "./app/state"
+  "actionsPath": "./app/actions",
+  "reducersPath": "./app/reducers",
+  "reducersIndexTemplatePath": "./redux-templates/reducer-index.jst",
+  "typesPath": "./app/types",
+  "statesPath": "./app/states",
+  "stateTemplatePath": "./redux-templates/state.jst",
+  "statesIndexTemplatePath": "./redux-templates/state-index.jst"
 }

@@ -1,15 +1,20 @@
 {
   "name": "react-redux-demo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Powered by redux-scfld: React-Redux demo application",
   "scripts": {
     "dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["react", "redux", "redux-scfld"],
+  "author": "Ivan Zakharchenko <3axap4eHko.development@gmail.com> (http://potofcode.com/)",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
   "dependencies": {
     "glob": "^7.0.5",
     "immutable": "^3.8.1",
@@ -20,13 +25,13 @@
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
+    "react-router-redux": "^4.0.5",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.1",
-    "xhr": "^2.2.0",
-    "yyf-core": "^2.0.1"
+    "xhr": "^2.2.0"
   },
   "devDependencies": {
     "babel-loader": "^6.2.4",
